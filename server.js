@@ -1,4 +1,4 @@
-﻿// server principal del crud de usuarios
+// server principal del crud de usuarios
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -74,3 +74,4 @@ app.delete("/api/usuarios/:id", (req, res) => {
 app.listen(PUERTO, () => {
   console.log("servidor corriendo en puerto " + PUERTO);
 });
+
