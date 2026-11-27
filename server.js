@@ -71,7 +71,20 @@ app.delete("/api/usuarios/:id", (req, res) => {
   res.json({ mensaje: "usuario borrado" });
 });
 
+// simula el pago y mejora la membresia del usuario
+app.post("/api/usuarios/:id/pago", (req, res) => {
+  const usuarios = leerUsuarios();
+  const index = usuarios.findIndex(u => u.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ error: "usuario no encontrado" });
+  }
+  usuarios[index].membresia = "premium";
+  guardarUsuarios(usuarios);
+  res.json(usuarios[index]);
+});
+
 app.listen(PUERTO, () => {
   console.log("servidor corriendo en puerto " + PUERTO);
 });
+
 
