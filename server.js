@@ -83,8 +83,21 @@ app.post("/api/usuarios/:id/pago", (req, res) => {
   res.json(usuarios[index]);
 });
 
+// endpoint de estadisticas para el dashboard
+app.get("/api/dashboard", (req, res) => {
+  const usuarios = leerUsuarios();
+  const totalUsuarios = usuarios.length;
+  const premium = usuarios.filter(u => u.membresia === "premium").length;
+  res.json({
+    totalUsuarios: totalUsuarios,
+    usuariosPremium: premium,
+    usuariosGratis: totalUsuarios - premium
+  });
+});
+
 app.listen(PUERTO, () => {
   console.log("servidor corriendo en puerto " + PUERTO);
 });
+
 
 
