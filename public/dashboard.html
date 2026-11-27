@@ -1,0 +1,26 @@
+﻿<!-- pagina de dashboard con estadisticas -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Dashboard</h1>
+  <p>Total usuarios: <span id="totalUsuarios">0</span></p>
+  <p>Usuarios premium: <span id="usuariosPremium">0</span></p>
+  <p>Usuarios gratis: <span id="usuariosGratis">0</span></p>
+
+  <script>
+    // trae las estadisticas del dashboard
+    fetch("/api/dashboard")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("totalUsuarios").innerText = data.totalUsuarios;
+        document.getElementById("usuariosPremium").innerText = data.usuariosPremium;
+        document.getElementById("usuariosGratis").innerText = data.usuariosGratis;
+      });
+  </script>
+</body>
+</html>
