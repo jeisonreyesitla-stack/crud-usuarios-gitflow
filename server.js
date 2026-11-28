@@ -10,6 +10,14 @@ const ARCHIVO_DATOS = path.join(__dirname, "usuarios.json");
 app.use(express.json());
 app.use(express.static("public"));
 
+// formatea la fecha como dia, mes, año, ya que antes quedaba mal con toString()
+function formatearFecha(fecha) {
+  const dia = String(fecha.getDate()).padStart(2, "0");
+  const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+  const anio = fecha.getFullYear();
+  return dia + "/" + mes + "/" + anio;
+}
+
 // lee los usuarios del archivo json
 function leerUsuarios() {
   const data = fs.readFileSync(ARCHIVO_DATOS, "utf-8");
@@ -98,6 +106,7 @@ app.get("/api/dashboard", (req, res) => {
 app.listen(PUERTO, () => {
   console.log("servidor corriendo en puerto " + PUERTO);
 });
+
 
 
 
